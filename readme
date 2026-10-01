@@ -1,0 +1,100 @@
+$\color{red}{\text{WORK IN PROGRESS}}$
+$\color{red}{\text{CURENTLY ONLY AVAILABLE ON DEBIAN}}$
+
+
+
+# Yoink 🎬
+
+> **The ultimate self-hosted YouTube downloader ecosystem.**  
+> Powered by a lightweight **Chrome Extension (MV3)** and a high-performance **Node.js + `yt-dlp` backend**.
+
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![Manifest](https://img.shields.io/badge/chrome%20extension-MV3-green.svg)
+![Backend](https://img.shields.io/badge/backend-Node.js%20%7C%20yt--dlp-red.svg)
+
+---
+
+## ✨ Features
+
+- ⚡ **Native YouTube Integration:** Automatically injects clean "Download" buttons beneath YouTube videos, Shorts, and playlist pages.
+- 🎬 **4K & 8K Video Quality:** Select resolution (144p to 4320p/8K), frame rates (60fps), and codecs (H.264, VP9, AV1).
+- 🎵 **High-Bitrate Audio:** One-click extraction to 320kbps MP3, M4A, WAV, or FLAC with automatically embedded album art and metadata.
+- 🚫 **SponsorBlock Integration:** Strip out sponsored segments, self-promotions, intros, and outros on download.
+- 📝 **Subtitles & Captions:** Download auto-generated or manual subtitles in `.srt` or `.vtt` formats, or embed them directly into video containers.
+- 📚 **Full Playlist Support:** Select individual videos or download entire playlists with organized folder hierarchies.
+- 📊 **Real-Time Websocket Updates:** Live progress tracking, speed gauges, and ETA readouts powered by Socket.IO.
+- 🔒 **100% Private:** Processing happens locally on your own machine. Zero third-party telemetry, tracking, or account requirements.
+
+---
+
+## 🏗️ Architecture Overview
+YOUTUBE WEBPAGE
+                         │
+                         ▼
+             ┌──────────────────────┐
+             │ Content Script       │  (Injects native download UI)
+             │ (content.js)         │
+             └───────────┬──────────┘
+                         │
+                         ▼
+             ┌──────────────────────┐
+             │ Service Worker       │  (Context menus & notifications)
+             │ (background.js)      │
+             └───────────┬──────────┘
+                         │
+        ┌────────────────┴────────────────┐
+        ▼                                 ▼
+┌──────────────────────┐          ┌──────────────────────┐
+│ Extension Popup UI   │          │ Full Dashboard UI    │
+│ (popup.html)         │          │ (dashboard.html)     │
+└───────────┬──────────┘          └───────────┬──────────┘
+│                                 │
+└────────────────┬────────────────┘
+│ REST / WebSockets (localhost:4000)
+▼
+┌──────────────────────┐
+│ Node.js Backend      │  (Express, Socket.IO)
+│ (server.js)          │
+└───────────┬──────────┘
+│
+▼
+┌──────────────────────┐
+│    yt-dlp + FFmpeg   │  (Core download engine)
+└──────────────────────┘
+
+
+---
+
+## 📋 Prerequisites
+
+Before running Yoink, ensure you have the following installed on your host system:
+
+1. **[Node.js](https://nodejs.org/)** (v18.0.0 or higher)
+
+2. **[yt-dlp](https://github.com/yt-dlp/yt-dlp)** (Must be added to system PATH)
+
+FFmpeg (Required for audio extraction, merging formats, and sub embedding)
+        
+🚀 Quick Start Guide
+1. Set Up the Backend Server
+# Clone repository
+git clone [https://github.com/YOUR_USERNAME/yoink.git](https://github.com/YOUR_USERNAME/yoink.git)
+cd yoink/backend
+
+# Install dependencies
+npm install
+
+# Start the local server
+node server.js
+The backend server will run on http://localhost:4000.
+
+2. Load the Chrome Extension
+Open Google Chrome and navigate to chrome://extensions/.
+
+Enable Developer mode using the toggle switch in the top right corner.
+
+Click Load unpacked.
+
+Select the folder you downloaded using the git command
+
+Navigate to any YouTube video—you will see the ⬇ Download button integrated into the page!
