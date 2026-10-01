@@ -1,7 +1,5 @@
-**$\color{red}{\text{WORK IN PROGRESS}}$**
-**$\color{red}{\text{CURENTLY ONLY AVAILABLE ON DEBIAN}}$**
-
-
+WORK IN PROGRESS
+CURRENTLY ONLY ON DEBIAN
 
 # Yoink 🎬
 
@@ -28,6 +26,8 @@
 ---
 
 ## 🏗️ Architecture Overview
+
+```text
 YOUTUBE WEBPAGE
                          │
                          ▼
@@ -61,7 +61,7 @@ YOUTUBE WEBPAGE
 ┌──────────────────────┐
 │    yt-dlp + FFmpeg   │  (Core download engine)
 └──────────────────────┘
-
+```
 
 ---
 
@@ -70,15 +70,17 @@ YOUTUBE WEBPAGE
 Before running Yoink, ensure you have the following installed on your host system:
 
 1. **[Node.js](https://nodejs.org/)** (v18.0.0 or higher)
-
 2. **[yt-dlp](https://github.com/yt-dlp/yt-dlp)** (Must be added to system PATH)
+3. **[FFmpeg](https://ffmpeg.org)** (Required for audio extraction, merging formats, and subtitle embedding)
 
-FFmpeg (Required for audio extraction, merging formats, and sub embedding)
-        
-🚀 Quick Start Guide
-1. Set Up the Backend Server
+---
+
+## 🚀 Quick Start Guide
+
+### 1. Set Up the Backend Server
+```bash
 # Clone repository
-git clone [https://github.com/YOUR_USERNAME/yoink.git](https://github.com/YOUR_USERNAME/yoink.git)
+git clone https://github.com/YOUR_USERNAME/yoink.git
 cd yoink/backend
 
 # Install dependencies
@@ -86,15 +88,13 @@ npm install
 
 # Start the local server
 node server.js
-The backend server will run on http://localhost:4000.
+```
+The backend server will run on `http://localhost:4000`.
 
-2. Load the Chrome Extension
-Open Google Chrome and navigate to chrome://extensions/.
+### 2. Load the Chrome Extension
+1. Open Google Chrome and navigate to `chrome://extensions/`.
+2. Enable **Developer mode** using the toggle switch in the top right corner.
+3. Click **Load unpacked**.
+4. Select the extension folder you downloaded using the git command.
 
-Enable Developer mode using the toggle switch in the top right corner.
-
-Click Load unpacked.
-
-Select the folder you downloaded using the git command
-
-Navigate to any YouTube video—you will see the ⬇ Download button integrated into the page!
+Navigate to any YouTube video—you will see the ⬇ **Download** button integrated directly into the page!
